@@ -96,7 +96,7 @@ hr {
 
 /* HEADER */
 header {
-  width: 600px;
+  width: 700px;
   display: flex;
   justify-content: center;
 }
@@ -120,6 +120,7 @@ main {
   background-repeat: no-repeat;
   background-position: center center;
   display: flex;
+  width: 100%;
   justify-content: space-between;
   height: 500px;
 }
@@ -138,14 +139,14 @@ main {
 
 .leftBox {
   display: flex;
-  flex: 0 1 35%;
+  flex: 0 1 25%;
   align-items: flex-start;
   justify-content: flex-end;
 }
 
 .rightBox {
   display: flex;
-  flex: 0 1 35%;
+  flex: 0 1 25%;
   align-items: flex-start;
 }
 

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Header from '../Header'
 import Landing from '../Landing'
+import Footer from '../Footer'
 import '/src/App.css'
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
       <div>
        <Header/>
        <Landing/>
+       <Footer/>
       </div>
     </>
   );

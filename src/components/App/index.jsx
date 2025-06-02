@@ -1,4 +1,4 @@
-
+import {BrowserRouter as Router, Routes, Route }from "react-router-dom"
 import Header from '../Header'
 import Landing from '../Landing'
 import Footer from '../Footer'
@@ -12,15 +12,20 @@ function App() {
 
   return (
     <>
-      <div>
+      <Router>
        <Header/>
-       <Welcome/>
-       <Landing/>
-       <Login/>
-       <Signup/>
-       <ErrorPage/>
+
+         <Routes>
+          <Route path='/' element={<Landing />} />
+          <Route path='/Welcome' element={<Welcome />} />
+          <Route path='/Login' element={<Login />} />
+          <Route path='/Signup' element={<Signup />} />
+          <Route path='*' element={<ErrorPage />} />
+        </Routes>
+
+   
        <Footer/>
-      </div>
+      </Router>
     </>
   );
 }

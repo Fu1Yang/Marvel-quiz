@@ -1,15 +1,22 @@
-import useState from 'react'
+import { useState } from 'react';
 
 const Signup = () => {
-  // const data = {
-  //   pseudo: '',
-  //   email: '',
-  //   password: '',
-  //   confimePassword: '',
-  // }
-  // const [loginData, setLoginData] = useState(data);
-  // console.log(loginData)
+  const data = {
+    pseudo: '',
+    email: '',
+    password: '',
+    confirmePassword: '',
+  }
+  const [loginData, setLoginData] = useState(data);
 
+  const handleChange = e => {
+    setLoginData({...loginData, [e.target.id]: e.target.value})
+  }
+
+  const {pseudo, email, password, confirmePassword} = loginData;
+
+ const btn = pseudo === '' || email === '' || password === '' || password !== confirmePassword
+ ? <button disabled>Inscription</button> : <button>Inscription</button>
   return (
     <div className='signUpLoginBox'>
         <div className='slContainer'>
@@ -20,23 +27,23 @@ const Signup = () => {
               <form>
                 <h2>Inscription</h2>
                 <div className='inputBox'>
-                  <input type='text' id='pseudo' required/>
+                  <input onChange={handleChange} value={pseudo} type='text' id='pseudo' required/>
                   <label htmlFor='pseudo'>Pseudo</label>
                 </div>
                  <div className='inputBox'>
-                  <input type='email' id='email' required/>
+                  <input onChange={handleChange} value={email} type='email' id='email' required/>
                   <label htmlFor='email'>Email</label>
                 </div>
                  <div className='inputBox'>
-                  <input type='password' id='password' required/>
+                  <input onChange={handleChange} value={password} type='password' id='password' required/>
                   <label htmlFor='password'>Password</label>
                 </div>
                 <div className='inputBox'>
-                  <input type='password' id='confimePassword' required/>
+                  <input onChange={handleChange} value={confirmePassword} type='password' id='confirmePassword' required/>
                   <label htmlFor='password'>Comfirme Password</label>
                 </div>
                 <div>
-                  <button type="submit">Inscription</button>
+                  {btn}
                 </div>
                 <div>
                   <p>déja inscrit ? Connectez-vous.</p>

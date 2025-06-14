@@ -1,10 +1,12 @@
 import { useState, useContext } from 'react';
 import { FirebaseContext } from '../Firebase';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const firebase = useContext(FirebaseContext);
   console.log(firebase);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const data = {
     pseudo: '',
@@ -30,6 +32,7 @@ const Signup = () => {
     firebase.signupUser(email, password)
     .then(user => {
         setLoginData({...data})
+        navigate('/welcome')
     })
     .catch(error =>{
         setError(error);

@@ -73,8 +73,8 @@ const Signup = () => {
             <div>
               {btn}
             </div>
-            <div>
-              <p>déja inscrit ? Connectez-vous.</p>
+            <div className='linkContainer'>
+              <Link className='simpleLink' to="/login">déja inscrit ? Connectez-vous.</Link>
             </div>
           </form>
         </div>

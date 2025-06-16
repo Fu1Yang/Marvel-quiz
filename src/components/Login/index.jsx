@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FirebaseContext } from '../Firebase';
 
-const Login = (props) => {
+const Login = () => {
 
  const firebase = useContext(FirebaseContext);
 
@@ -11,7 +11,7 @@ const Login = (props) => {
   const [btn, setBtn] = useState(false);
   const [error, setError] = useState('')
   const navigate = useNavigate();
-  
+
   useEffect(()=>{
     if (password.length > 5 && email !== ""){
         setBtn(true)
@@ -31,7 +31,7 @@ const Login = (props) => {
       console.log(user)
       setEmail('');
       setPassword('');
-       navigate('/welcome');
+      navigate('/welcome', {replace: true});
     })
     .catch(error => {
       setError(error);
@@ -63,7 +63,9 @@ const Login = (props) => {
             <div className='linkContainer'>
               <Link className='simpleLink' to="/signup">Nouveau sur marvel Quiz ? Inscrivez-vous maintenant</Link>
             </div>
-            {btn ? <button>Connexion</button> : <button disabled>Connexion</button> }
+            {
+              <button disabled={btn ? false : true}>Connexion</button>
+            }
           </form>
         </div>
       </div>

@@ -59,14 +59,15 @@ const Login = () => {
               <input onChange={handlePassword} value={password} type='password' id='password' required />
               <label htmlFor='password'>Password</label>
             </div>
-
-            <div className='linkContainer'>
-              <Link className='simpleLink' to="/signup">Nouveau sur marvel Quiz ? Inscrivez-vous maintenant</Link>
-            </div>
             {
               <button disabled={btn ? false : true}>Connexion</button>
             }
           </form>
+          <div className='linkContainer'> 
+              <Link className='simpleLink' to="/signup">Nouveau sur marvel Quiz ? Inscrivez-vous maintenant</Link>
+              <br/>
+              <Link className='simpleLink' to="/signup">Mot de passe oublié? Récupérez-le ici.</Link>
+          </div>
         </div>
       </div>
     </div>

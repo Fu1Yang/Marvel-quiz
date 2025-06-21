@@ -33,7 +33,7 @@ class Firebase {
   signoutUser = () => signOut(this.auth);
 
   // récupérer le mot de passe
-  passwordReset = email => this.auth.sendPasswordResetEmail(email);
+  // passwordReset = email => this.auth.sendPasswordResetEmail(email);
 
 
 }

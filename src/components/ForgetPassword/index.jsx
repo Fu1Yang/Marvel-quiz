@@ -17,7 +17,7 @@ const ForgetPassword = () => {
  
     const handleSubmit = e => {
       e.preventDefault();
-      sendPasswordResetEmail(getAuth, email)
+      sendPasswordResetEmail(getAuth(), email)
       .then(() =>{
         setError(null);
         setSuccess(`Consultez votre adresse email ${email} pour changer le mot de passe`)

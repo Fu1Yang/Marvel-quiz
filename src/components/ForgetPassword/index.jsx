@@ -12,17 +12,18 @@ const ForgetPassword = () => {
     const [success, setSuccess] = useState(null);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const auth = getAuth()
+   
   
-
  
     const handleSubmit = e => {
       e.preventDefault();
-      sendPasswordResetEmail(getAuth(), email)
+      sendPasswordResetEmail(auth, email)
       .then(() =>{
         setError(null);
         setSuccess(`Consultez votre adresse email ${email} pour changer le mot de passe`)
         setEmail('');
-        setTimeout (()=>{
+        setTimeout (() =>{
             navigate('/login');
         }, 5000)
 

@@ -66,7 +66,7 @@ const Login = () => {
           <div className='linkContainer'> 
               <Link className='simpleLink' to="/signup">Nouveau sur marvel Quiz ? Inscrivez-vous maintenant</Link>
               <br/>
-              <Link className='simpleLink' to="/signup">Mot de passe oublié? Récupérez-le ici.</Link>
+              <Link className='simpleLink' to="/forgetpassword">Mot de passe oublié? Récupérez-le ici.</Link>
           </div>
         </div>
       </div>

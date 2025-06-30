@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   signOut
 } from 'firebase/auth';
+import { getFirestore, doc, setDoc  } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCGWK5mCPkk_TJ6hiYH9-klzeERzEEqDc4",
@@ -19,6 +20,7 @@ class Firebase {
   constructor() {
     this.app = initializeApp(firebaseConfig);
     this.auth = getAuth(this.app);
+    this.db = getFirestore(this.app);
   }
 
   // inscription
@@ -34,7 +36,13 @@ class Firebase {
 
   // récupérer le mot de passe
   // passwordReset = email => this.auth.sendPasswordResetEmail(email);
+  user = (uid) => doc(this.db, `users/${uid}`);
 
+  setUserData = (uid, data) => {
+    return setDoc(this.user(uid), data, { merge: true });
+  };
+
+  
 
 }
 

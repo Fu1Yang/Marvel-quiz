@@ -9,6 +9,7 @@ const Welcome = () => {
   const firebase = useContext(FirebaseContext);
   const [userSession, setUserSession] = useState(null);
   const navigate = useNavigate();
+  
   useEffect(()=>{
     let listener = firebase.auth.onAuthStateChanged(user => {
       user ? setUserSession(user) :  navigate('/')

@@ -26,19 +26,23 @@ const Signup = () => {
     ? <button disabled>Inscription</button> : <button>Inscription</button>
 
   const handleSubmit = e => {
+  e.preventDefault();
+  const { email, password, pseudo } = loginData;
 
-    const { email, password} = loginData;
-    e.preventDefault();
-    firebase.signupUser(email, password)
-    .then(user => {
-        setLoginData({...data})
-        navigate('/welcome')
+  firebase.signupUser(email, password)
+    .then(authUser => {
+      return firebase.setUserData(authUser.user.uid, {pseudo,email});
     })
-    .catch(error =>{
-        setError(error);
-         setLoginData({...data})
+    .then(() => {
+      setLoginData({ ...data });
+      navigate('/welcome');
     })
-  }
+    .catch(error => {
+      setError(error);
+      setLoginData({ ...data });
+    });
+};
+
 
 
   //gestion des erreurs

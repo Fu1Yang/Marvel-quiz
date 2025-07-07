@@ -22,10 +22,10 @@ const Welcome = () => {
       navigate('/');
     }
   });
-    return ()=> listener();
+    return () => listener();
   },[firebase, navigate])
 
-    useEffect(() => {
+  useEffect(() => {
     if (userSession) {
       const userRef = firebase.user(userSession.uid);
       getDoc(userRef)

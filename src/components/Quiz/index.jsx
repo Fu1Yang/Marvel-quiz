@@ -1,13 +1,17 @@
 import React from 'react'
-
+import Levels from '../Levels'
+import ProgressBar from '../ProgressBar'
 
 
 const Quiz = props => {
 
+
+
   return (
     <div>
       <h2>Bonjour: {props.userData.pseudo}</h2>
-      <p>Soit le bienvenue parmis nous</p>
+      <Levels/>
+      <ProgressBar/>
     </div>
   )
 }

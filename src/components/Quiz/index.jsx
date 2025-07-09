@@ -1,44 +1,72 @@
-import React, { useEffect, useState } from 'react'
-import Levels from '../Levels'
-import ProgressBar from '../ProgressBar'
-import {QuizMarvel} from '../QuizMarvel'
+import React, { useEffect, useState } from 'react';
+import Levels from '../Levels';
+import ProgressBar from '../ProgressBar';
+import { QuizMarvel } from '../QuizMarvel';
 
-const Quiz = props => {
-  const [levels, setLevels] = useState(['debutant', 'confirmer', 'expert']);
-  const [storedQuestion, setStoredQuestion] = useState()
-    const loadQuestions = level => {
-      const fetchedArrayQuiz = QuizMarvel[0].quizz[level]
-      console.log(fetchedArrayQuiz);
-      if (fetchedArrayQuiz.length >= 10) {
-          setLevels[1]
-          const newArray = fetchedArrayQuiz.map(({answer,...keepRest})=> keepRest{
+const Quiz = ({ userData }) => {
+  const levels = ['debutant', 'confirmer', 'expert'];
+  const [quizLevel, setQuizLevel] = useState(0);
+  const [maxQuestions, setMaxQuestions] = useState(10);
+  const [storedQuestions, setStoredQuestions] = useState([]);
+  const [currentQuestion, setCurrentQuestion] = useState(null);
+  const [options, setOptions] = useState([]);
+  const [questionIndex, setQuestionIndex] = useState(0);
 
-          })
-      }else{
-        console.log("Pas assez de question!!!");
-        
-      }
-      
+  const loadQuestions = (level) => {
+    const fetchedArrayQuiz = QuizMarvel[0].quizz[level];
+    
+    if (fetchedArrayQuiz.length >= maxQuestions) {
+      // Retire les réponses pour ne pas les afficher
+      const cleanedQuestions = fetchedArrayQuiz.map(({ answer, ...rest }) => rest);
+      setStoredQuestions(cleanedQuestions);
+    } else {
+      console.log('Pas assez de questions pour ce niveau !');
     }
+  };
+
+  // Chargement initial des questions au premier rendu
   useEffect(() => {
-    loadQuestions(levels[0]); // <-- levels, pas setLevels !
-  }, [levels]);
+    const currentLevel = levels[quizLevel];
+    loadQuestions(currentLevel);
+  }, [quizLevel]);
 
-
+  // Met à jour la question à afficher une fois que les questions sont chargées
+  useEffect(() => {
+    if (storedQuestions.length > 0) {
+      setCurrentQuestion(storedQuestions[questionIndex].question);
+      setOptions(storedQuestions[questionIndex].options);
+    }
+  }, [storedQuestions, questionIndex]);
 
   return (
     <div>
-      <h2>Bonjour: {props.userData.pseudo}</h2>
-      <Levels/>
-      <ProgressBar/>
-      <h2>Notre question Quiz</h2>
-      <p className='answerOptions'>Question 1</p>
-      <p className='answerOptions'>Question 2</p>
-      <p className='answerOptions'>Question 3</p>
-      <p className='answerOptions'>Question 4</p>
-      <button className='btnSubmit'>Question suivant</button>
+      <h2>Bonjour : {userData.pseudo}</h2>
+      <Levels />
+      <ProgressBar />
+      <h2>Question {questionIndex + 1}</h2>
+      {currentQuestion && (
+        <>
+          <p>{currentQuestion}</p>
+          {options.map((option, idx) => (
+            <p key={idx} className="answerOptions">{option}</p>
+          ))}
+        </>
+      )}
+      <button
+        className="btnSubmit"
+        onClick={() => {
+          if (questionIndex + 1 < storedQuestions.length) {
+            setQuestionIndex(prev => prev + 1);
+          } else {
+            console.log('Fin du quiz');
+            // Tu pourrais passer au niveau suivant ici
+          }
+        }}
+      >
+        Question suivante
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default Quiz
+export default Quiz;

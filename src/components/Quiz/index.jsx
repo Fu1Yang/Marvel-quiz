@@ -11,6 +11,8 @@ const Quiz = ({ userData }) => {
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [options, setOptions] = useState([]);
   const [questionIndex, setQuestionIndex] = useState(0);
+  const [btnDisabled, setBtnDisabled] = useState(true);
+  const [userAnswer, setUserAnswer] = useState(null);
 
   const loadQuestions = (level) => {
     const fetchedArrayQuiz = QuizMarvel[0].quizz[level];
@@ -38,6 +40,12 @@ const Quiz = ({ userData }) => {
     }
   }, [storedQuestions, questionIndex]);
 
+  const submitAnswer = selectedAnswer => {
+    setUserAnswer(selectedAnswer)
+    setBtnDisabled(false)
+
+  }
+
   return (
     <div>
       <h2>Bonjour : {userData.pseudo}</h2>
@@ -48,12 +56,14 @@ const Quiz = ({ userData }) => {
         <>
           <p>{currentQuestion}</p>
           {options.map((option, idx) => (
-            <p key={idx} className="answerOptions">{option}</p>
+            <p key={idx} className={`answerOptions ${userAnswer == option ?"selected" : null}`}
+            onClick={()=> submitAnswer(option)}>{option}</p>
           ))}
         </>
       )}
       <button
         className="btnSubmit"
+        disabled={btnDisabled}
         onClick={() => {
           if (questionIndex + 1 < storedQuestions.length) {
             setQuestionIndex(prev => prev + 1);

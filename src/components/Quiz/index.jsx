@@ -16,7 +16,7 @@ const Quiz = ({ userData }) => {
 
   const loadQuestions = (level) => {
     const fetchedArrayQuiz = QuizMarvel[0].quizz[level];
-    
+
     if (fetchedArrayQuiz.length >= maxQuestions) {
       // Retire les réponses pour ne pas les afficher
       const cleanedQuestions = fetchedArrayQuiz.map(({ answer, ...rest }) => rest);
@@ -43,7 +43,6 @@ const Quiz = ({ userData }) => {
   const submitAnswer = selectedAnswer => {
     setUserAnswer(selectedAnswer)
     setBtnDisabled(false)
-
   }
 
   return (
@@ -56,8 +55,8 @@ const Quiz = ({ userData }) => {
         <>
           <p>{currentQuestion}</p>
           {options.map((option, idx) => (
-            <p key={idx} className={`answerOptions ${userAnswer == option ?"selected" : null}`}
-            onClick={()=> submitAnswer(option)}>{option}</p>
+            <p key={idx} className={`answerOptions ${userAnswer == option ? "selected" : null}`}
+              onClick={() => submitAnswer(option)}>{option}</p>
           ))}
         </>
       )}
